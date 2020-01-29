@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BUTTON_STYLE } from "../../constants/STYLES";
+import { BUTTON_STYLE } from "../../constants";
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -17,8 +17,8 @@ export const Window = styled.div`
   left: 50%;
   top: 50%;
   padding: 20px 20px 20px 30px;
-  width: 50vw;
-  height: 50vh;
+  width: 700px;
+  height: 400px;
   z-index: 100;
   transform: translate(-50%, -50%);
   border-radius: 10px;

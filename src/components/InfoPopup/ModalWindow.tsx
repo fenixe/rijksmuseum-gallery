@@ -12,7 +12,7 @@ import {
   Image
 } from "./InfoPopup.styles";
 import { useHistory, useParams } from "react-router-dom";
-import { ROUTES } from "../../constants/ROUTES";
+import { ROUTES } from "../../constants";
 
 interface ModalWindowProps {
   closePopup: () => void;

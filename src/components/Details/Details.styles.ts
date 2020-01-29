@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BUTTON_STYLE } from "../../constants/STYLES";
+import { BUTTON_STYLE } from "../../constants";
 
 export const DetailsContainer = styled.div`
   display: grid;

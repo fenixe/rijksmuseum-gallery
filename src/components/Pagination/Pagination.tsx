@@ -1,17 +1,10 @@
 import React from "react";
 import ItemsPerPage from "./ItemsPerPage";
-import { PaginationPanel, PaginationPanelItem } from "./Pagination.styles";
+import PaginationPanel from "./PaginationPanel";
 
-const Pagination: React.FC = () => (
+const Pagination: React.FC = (): React.ReactElement => (
   <>
-    <PaginationPanel>
-      <PaginationPanelItem>&laquo;</PaginationPanelItem>
-      <PaginationPanelItem className={"active"}>1</PaginationPanelItem>
-      <PaginationPanelItem>2</PaginationPanelItem>
-      <PaginationPanelItem>3</PaginationPanelItem>
-      <PaginationPanelItem>4</PaginationPanelItem>
-      <PaginationPanelItem>&raquo;</PaginationPanelItem>
-    </PaginationPanel>
+    <PaginationPanel />
     <ItemsPerPage />
   </>
 );

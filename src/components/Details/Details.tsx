@@ -11,7 +11,7 @@ import {
   CloseButton
 } from "./Details.styles";
 
-import { ROUTES } from "../../constants/ROUTES";
+import { ROUTES } from "../../constants";
 import { useHistory } from "react-router-dom";
 
 const imgSrc: string =

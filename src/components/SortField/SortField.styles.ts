@@ -17,14 +17,6 @@ export const SelectedValue = styled.p`
   cursor: pointer;
 `;
 
-// const Select = styled.select`
-//   position: absolute;
-//   overflow: hidden;
-//   height: 0px;
-//   opacity: 0;
-//   z-index: -1;
-// `;
-
 export const SelectOrderContainer = styled.div`
   position: relative;
   float: left;

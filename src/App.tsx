@@ -7,7 +7,7 @@ import {
   Redirect
 } from "react-router-dom";
 
-import { ROUTES } from "./constants/ROUTES";
+import { ROUTES } from "./constants";
 import Header from "./components/Header";
 import Gallery from "./components/Gallery";
 import InfoPopup from "./components/InfoPopup";

@@ -28,16 +28,6 @@ const SortField: React.FC = (): React.ReactElement => {
 
   return (
     <SelectOrderContainer>
-      {/*<Select>*/}
-      {/*  <option value="">Select Order by:</option>*/}
-      {/*  {SortList.map((item, index) => {*/}
-      {/*    return (*/}
-      {/*      <option key={index} value={index}>*/}
-      {/*        {SortList[index]}*/}
-      {/*      </option>*/}
-      {/*    );*/}
-      {/*  })}*/}
-      {/*</Select>*/}
       <SelectedValue onClick={openSelect}>
         Order by: {SortList[selectValue]}
       </SelectedValue>

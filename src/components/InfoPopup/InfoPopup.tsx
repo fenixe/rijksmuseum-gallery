@@ -2,7 +2,7 @@ import React from "react";
 import { ModalBackground } from "./InfoPopup.styles";
 import ModalWindow from "./ModalWindow";
 import { useHistory } from "react-router-dom";
-import { ROUTES } from "../../constants/ROUTES";
+import { ROUTES } from "../../constants";
 
 const InfoPopup: React.FC = (): React.ReactElement => {
   let history = useHistory();
