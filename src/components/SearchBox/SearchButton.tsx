@@ -1,6 +1,12 @@
 import React from "react";
 import { Button } from "./SearchBox.styles";
 
-const SearchButton: React.FC = () => <Button>Search</Button>;
+interface SearchButtonProps {
+  onSearchAction: () => void;
+}
+
+const SearchButton: React.FC<SearchButtonProps> = ({
+  onSearchAction
+}): React.ReactElement => <Button onClick={onSearchAction}>Search</Button>;
 
 export default SearchButton;

@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { BUTTON_STYLE } from "../../constants";
+
+export const situateInCenter = css`
+  align-self: center;
+  justify-self: center;
+`;
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -14,26 +19,30 @@ export const ModalBackground = styled.div`
 export const Window = styled.div`
   position: absolute;
   background: #fff;
+  color: black;
   left: 50%;
   top: 50%;
   padding: 20px 20px 20px 30px;
-  width: 700px;
-  height: 400px;
   z-index: 100;
   transform: translate(-50%, -50%);
   border-radius: 10px;
   box-shadow: 6px 6px 17px 2px rgba(0, 0, 0, 0.75);
 `;
 
+export const Title = styled.p`
+  font-size: 22px;
+  margin-top: 0;
+  text-align: center;
+`;
+
 export const InfoGridContainer = styled.div`
   display: inline-grid;
-  width: 100%;
-  height: 100%;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 60px;
 `;
 
 export const ImageContainer = styled.div`
+  ${situateInCenter};
   grid-area: 1 / 1 / 2 / 2;
 `;
 
@@ -42,15 +51,15 @@ export const Image = styled.img`
 `;
 
 export const DescriptionContainer = styled.div`
+  ${situateInCenter};
   grid-area: 1 / 2 / 2 / 3;
   padding: 0 20px;
   overflow: auto;
 `;
 
 export const DetailsButtonContainer = styled.div`
+  ${situateInCenter};
   grid-area: 2 / 1 / 3 / 2;
-  align-self: center;
-  justify-self: center;
 `;
 
 export const CloseButtonContainer = styled.div`
@@ -60,7 +69,6 @@ export const CloseButtonContainer = styled.div`
 `;
 
 export const Description = styled.div`
-  color: black;
   font-size: 18px;
 `;
 

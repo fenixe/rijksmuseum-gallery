@@ -1,26 +1,26 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { setItemsPerPage } from "../actions";
+import { setItemsPerPageAction } from "../actions";
 import { ITEMS_PER_PAGE_ARRAY } from "../constants";
 
 export interface ItemsPerPage {
-  quantity: number;
+  pageLimit: number;
 }
 
-export const initialState: ItemsPerPage = {
-  quantity: ITEMS_PER_PAGE_ARRAY[0]
+const initialState: ItemsPerPage = {
+  pageLimit: ITEMS_PER_PAGE_ARRAY[0]
 };
 
 const itemsPerPageReducer = createReducer(initialState, {
-  [setItemsPerPage.type]: (
+  [setItemsPerPageAction.type]: (
     state: ItemsPerPage,
-    action: ReturnType<typeof setItemsPerPage>
+    action: ReturnType<typeof setItemsPerPageAction>
   ) => {
     const {
-      payload: { quantity }
+      payload: { pageLimit }
     } = action;
     return {
       ...state,
-      quantity
+      pageLimit
     };
   }
 });

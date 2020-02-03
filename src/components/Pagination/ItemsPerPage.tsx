@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
-import { ItemsPerPageWrapper, QuantityButton } from "./Pagination.styles";
-import { setItemsPerPage } from "../../actions";
-import { RootState } from "../../reducers";
+import { setItemsPerPageAction } from "../../actions";
 import { ITEMS_PER_PAGE_ARRAY } from "../../constants";
+import { getPageLimit } from "../../selectors";
+import { ItemsPerPageWrapper, QuantityButton } from "./Pagination.styles";
 
 const ItemsPerPage: React.FC = (): React.ReactElement => {
-  const quantity = useSelector(
-    (state: RootState) => state.itemsPerPage.quantity
-  );
-  const [currentQuantity, setCurrentQuantity] = useState(quantity);
   const dispatch: Dispatch = useDispatch();
+  const pageLimit = useSelector(getPageLimit);
+
+  const handleButton = (quantity: number) => {
+    dispatch(setItemsPerPageAction({ pageLimit: quantity }));
+  };
 
   return (
     <ItemsPerPageWrapper>
@@ -19,10 +20,9 @@ const ItemsPerPage: React.FC = (): React.ReactElement => {
         return (
           <QuantityButton
             onClick={() => {
-              setCurrentQuantity(quantity);
-              dispatch(setItemsPerPage({ quantity }));
+              handleButton(quantity);
             }}
-            className={quantity === currentQuantity ? "active" : ""}
+            className={quantity === pageLimit ? "active" : ""}
             key={quantity}
           >
             {quantity}

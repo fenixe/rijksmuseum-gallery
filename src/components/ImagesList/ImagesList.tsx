@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
+import { getImagesListAction } from "../../actions";
+import {
+  getCountResult,
+  getCurrentPage,
+  getImagesList,
+  getPageLimit,
+  getQuery,
+  getSortOrder
+} from "../../selectors";
 import Image from "./Image";
-import { ImagesListContainer } from "./ImagesList.styles";
-import { RootState } from "../../reducers";
-import { getImagesList } from "../../actions";
+import { ImagesListContainer, Notification } from "./ImagesList.styles";
 
 const ImagesList: React.FC = (): React.ReactElement => {
-  const imagesList = useSelector(
-    (state: RootState) => state.imagesLibrary.images
-  );
-
-  const quantity = useSelector(
-    (state: RootState) => state.itemsPerPage.quantity
-  );
+  const imagesList = useSelector(getImagesList);
+  const currentPage = useSelector(getCurrentPage);
+  const countResult = useSelector(getCountResult);
+  const pageLimit = useSelector(getPageLimit);
+  const sort = useSelector(getSortOrder);
+  const query = useSelector(getQuery);
 
   const dispatch: Dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getImagesList({ quantity }));
-  }, [dispatch, quantity]);
+    dispatch(getImagesListAction({ pageLimit, currentPage, sort, query }));
+  }, [dispatch, pageLimit, currentPage, sort, query]);
+
+  const noDataNotification = "No art object could be found by your query";
 
   return (
     <ImagesListContainer>
-      {imagesList.map((data, index) => (
-        <Image key={data.id} {...data} />
-      ))}
+      {countResult === 0 ? (
+        <Notification>{noDataNotification}</Notification>
+      ) : (
+        imagesList.map(data => <Image key={data.id} {...data} />)
+      )}
     </ImagesListContainer>
   );
 };

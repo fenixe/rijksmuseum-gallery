@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-
+import { SORT_LIST } from "../../constants";
+import { setSortOrderAction } from "../../actions";
 import {
   SelectOrderContainer,
   SelectedValue,
@@ -11,14 +14,22 @@ import {
   SelectListItem
 } from "./SortField.styles";
 
-const SortList: Array<string> = ["Order", "Order 2", "Order 3"];
+export interface SortOrderItem {
+  key: string;
+  title: string;
+}
 
 const SortField: React.FC = (): React.ReactElement => {
+  const dispatch: Dispatch = useDispatch();
+
   const [selectValue, setSelectValue] = useState();
   const [isListOpen, setIsListOpen] = useState(false);
 
-  const toggleMenu = (selectValue: number): void => {
-    setSelectValue(selectValue);
+  const selectSortOrder = ({ key, title }: SortOrderItem): void => {
+    setSelectValue(title);
+
+    dispatch(setSortOrderAction({ sort: key }));
+
     setIsListOpen(false);
   };
 
@@ -29,21 +40,21 @@ const SortField: React.FC = (): React.ReactElement => {
   return (
     <SelectOrderContainer>
       <SelectedValue onClick={openSelect}>
-        Order by: {SortList[selectValue]}
+        Order by: {selectValue}
       </SelectedValue>
       <Icon onClick={openSelect} isOpen={isListOpen}>
         <FontAwesomeIcon icon={faAngleDown} />
       </Icon>
       <ContainerSelectList>
         <SelectList isOpen={isListOpen}>
-          {SortList.map((item, index) => {
+          {SORT_LIST.map((item, index) => {
             return (
               <SelectListItem
                 isActive={selectValue === index}
-                onClick={() => toggleMenu(index)}
+                onClick={() => selectSortOrder(item)}
                 key={index}
               >
-                {item}
+                {item.title}
               </SelectListItem>
             );
           })}

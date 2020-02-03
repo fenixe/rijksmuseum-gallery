@@ -68,7 +68,7 @@ export const SelectListItem = styled.li<{ isActive: boolean }>`
   cursor: pointer;
 
   &:last-child {
-    border-radius: 12px;
+    border-radius: 0 0 12px 12px;
     border-bottom: 0;
   }
 

@@ -66,3 +66,8 @@ export const StyledLink = styled(Link)`
     opacity: 0.6;
   }
 `;
+
+export const Notification = styled.p`
+  justify-self: center;
+  align-self: center;
+`;

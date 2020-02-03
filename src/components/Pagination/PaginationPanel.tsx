@@ -1,37 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux";
+import { fetchPageNumbers } from "../../helpers";
+import { setCurrentPageAction } from "../../actions";
+import { getTotalShowPages } from "../../selectors";
 import NavigationButton from "./NavigationButton";
 import { PaginationContainer, PaginationButton } from "./Pagination.styles";
 
 const PaginationPanel: React.FC = (): React.ReactElement => {
+  const dispatch: Dispatch = useDispatch();
+  const totalShowPages = useSelector(getTotalShowPages);
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pagesArray: Array<number> = [1, 2, 3, 4, 5, 6];
+  useEffect(() => {
+    dispatch(setCurrentPageAction({ currentPage }));
+  }, [dispatch, currentPage]);
+
+  const pages = fetchPageNumbers(totalShowPages, currentPage);
+
+  const onNavigationButtonClick = (pageNumber: number) => {
+    if (pageNumber < 1) {
+      pageNumber = 1;
+    } else if (pageNumber > totalShowPages) {
+      pageNumber = totalShowPages;
+    }
+
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <PaginationContainer>
       <NavigationButton
         navigationHandle={() => {
-          console.log("prev");
+          onNavigationButtonClick(currentPage - 1);
         }}
       >
         &laquo;
       </NavigationButton>
-      {pagesArray.map(item => {
-        return (
-          <PaginationButton
-            onClick={() => {
-              setCurrentPage(item);
-            }}
-            className={item === currentPage ? "active" : ""}
-            key={item}
-          >
-            {item}
-          </PaginationButton>
-        );
+      {pages.map(page => {
+        if (page < 0) {
+          return "...";
+        } else {
+          return (
+            <PaginationButton
+              onClick={() => {
+                setCurrentPage(page);
+              }}
+              className={page === currentPage ? "active" : ""}
+              key={page}
+            >
+              {page}
+            </PaginationButton>
+          );
+        }
       })}
       <NavigationButton
         navigationHandle={() => {
-          console.log("next");
+          onNavigationButtonClick(currentPage + 1);
         }}
       >
         &raquo;
