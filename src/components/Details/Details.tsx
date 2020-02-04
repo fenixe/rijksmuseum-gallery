@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { DetailsContainer } from "./Details.styles";
 import { ROUTES } from "../../constants";
 import { getImageData, getImageDataStatus } from "../../selectors";
 import { getImageDetailsAction } from "../../actions";
 import DetailsBody from "./DetailsBody";
-import Spinner from "../LoadingSpinner/Spinner";
+import Spinner from "../Spinner";
+import { DetailsContainer } from "./Details.styles";
 
 const Details: React.FC = (): React.ReactElement => {
   const history = useHistory();
@@ -19,11 +19,7 @@ const Details: React.FC = (): React.ReactElement => {
 
   const { isLoaded, successLoaded } = status;
 
-  const {
-    title = "",
-    description = "",
-    webImageUrl = ""
-  } = imageData;
+  const { title = "", description = "", webImageUrl = "" } = imageData;
 
   useEffect(() => {
     dispatch(getImageDetailsAction({ imageId: id }));

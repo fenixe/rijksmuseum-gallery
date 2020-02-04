@@ -13,7 +13,7 @@ import {
 } from "../../selectors";
 import Image from "./Image";
 import { ImagesListContainer, Notification } from "./ImagesList.styles";
-import Spinner from "../LoadingSpinner/Spinner";
+import Spinner from "../Spinner";
 
 const ImagesList: React.FC = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();

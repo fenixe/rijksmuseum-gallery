@@ -5,7 +5,7 @@ import {
   DescriptionContainer,
   Image,
   ImageContainer,
-  Title,
+  Title
 } from "./Details.styles";
 
 interface DetailsBodyProps {
