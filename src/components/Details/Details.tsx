@@ -1,57 +1,54 @@
-import React from "react";
-import {
-  DetailsContainer,
-  Title,
-  ImageContainer,
-  Image,
-  DescriptionContainer,
-  Description,
-  Category,
-  Tags,
-  CloseButton
-} from "./Details.styles";
-
+import React, { useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux";
+import { DetailsContainer } from "./Details.styles";
 import { ROUTES } from "../../constants";
-import { useHistory } from "react-router-dom";
-
-const imgSrc: string =
-  "https://rijks-qms-frontend.azureedge.net/assets/70a9dfb8-c5ac-4ec1-ab18-341617954c39?w=990&h=660&c=8b03c4c423a54cd2e2c3ca9835d9349aefa8be0b6b5e28f43414a93f5ac48057";
-
-const title: string =
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "Specifying a value other than visible (the default) creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.\n" +
-  "\n" +
-  "In order for overflow to have an effect, the block-level container must have either a set height (height or max-height) or white-space set to nowrap.";
+import { getImageData, getImageDataStatus } from "../../selectors";
+import { getImageDetailsAction } from "../../actions";
+import DetailsBody from "./DetailsBody";
+import Spinner from "../LoadingSpinner/Spinner";
 
 const Details: React.FC = (): React.ReactElement => {
-  let history = useHistory();
+  const history = useHistory();
+  const dispatch: Dispatch = useDispatch();
+  const { id = "" } = useParams();
+
+  const imageData = useSelector(getImageData);
+  const status = useSelector(getImageDataStatus);
+
+  const { isLoaded, successLoaded } = status;
+
+  const {
+    title = "",
+    description = "",
+    webImageUrl = ""
+  } = imageData;
+
+  useEffect(() => {
+    dispatch(getImageDetailsAction({ imageId: id }));
+  }, [dispatch, id]);
+
   const closePopup = () => {
     history.push(ROUTES.GALLERY_URL);
   };
 
   return (
-    <DetailsContainer>
-      <Title>{"Paint Name"}</Title>
-      <ImageContainer>
-        <Image src={imgSrc} />
-      </ImageContainer>
-      <DescriptionContainer>
-        <Description>{title}</Description>
-      </DescriptionContainer>
-      <Category>Category: {"category category"}</Category>
-      <Tags>Tags: {"tags tags tags"}</Tags>
-      <CloseButton type="button" onClick={closePopup}>
-        Close
-      </CloseButton>
-    </DetailsContainer>
+    <>
+      {isLoaded ? (
+        <Spinner />
+      ) : (
+        <DetailsContainer>
+          <DetailsBody
+            successLoaded={successLoaded}
+            closePopup={closePopup}
+            title={title}
+            description={description}
+            webImageUrl={webImageUrl}
+          />
+        </DetailsContainer>
+      )}
+    </>
   );
 };
 

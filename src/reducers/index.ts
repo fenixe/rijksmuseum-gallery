@@ -5,6 +5,7 @@ export default rootReducer;
 export * from "./rootReducer";
 export * from "./itemsPerPageReducer";
 export * from "./imagesLibraryReducer";
+export * from "./imageDetailsReducer";
 export * from "./paginationReducer";
 export * from "./sortOrderReducer";
 export * from "./searchReducer";

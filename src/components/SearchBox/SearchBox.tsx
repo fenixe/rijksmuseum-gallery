@@ -1,4 +1,4 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import SearchButton from "./SearchButton";

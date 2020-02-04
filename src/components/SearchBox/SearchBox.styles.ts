@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import { BUTTON_STYLE, SHARED_SEARCH_STYLES } from "../../constants";
 
 export const SearchContainer = styled.div`

@@ -1,7 +1,7 @@
 import { API_KEY, API_URL, PAGE_NEIGHBOURS } from "../constants";
 import { ImagesListRequest } from "../sagas";
 
-export const generateUrl = ({
+export const generateCollectionUrl = ({
   pageLimit,
   currentPage,
   sort,
@@ -16,6 +16,10 @@ export const generateUrl = ({
   }
 
   return url;
+};
+
+export const generateDetailsUrl = (imageId: string): string => {
+  return `${API_URL}/${imageId}?key=${API_KEY}`;
 };
 
 export const fetchPageNumbers = (

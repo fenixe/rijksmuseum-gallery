@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { fetchPageNumbers } from "../../helpers";
 import { setCurrentPageAction } from "../../actions";
-import { getTotalShowPages } from "../../selectors";
+import { getCurrentPage, getTotalShowPages } from "../../selectors";
 import NavigationButton from "./NavigationButton";
 import { PaginationContainer, PaginationButton } from "./Pagination.styles";
 
 const PaginationPanel: React.FC = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
   const totalShowPages = useSelector(getTotalShowPages);
+  const page = useSelector(getCurrentPage);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(page);
 
   useEffect(() => {
     dispatch(setCurrentPageAction({ currentPage }));

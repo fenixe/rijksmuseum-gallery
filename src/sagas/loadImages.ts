@@ -1,14 +1,19 @@
 import { put, take, fork } from "redux-saga/effects";
 import { ACTIONS } from "../constants";
-import { generateUrl } from "../helpers";
-import { ImageData } from "../reducers";
+import { generateCollectionUrl } from "../helpers";
+import { ImageListData } from "../reducers";
 
 export interface WebImage {
   url: string;
 }
 
+export interface Status {
+  successLoaded: boolean;
+  isLoaded: boolean;
+}
+
 export interface ImageResponseData {
-  id: string;
+  objectNumber: string;
   title: string;
   longTitle: string;
   headerImage: WebImage;
@@ -23,22 +28,33 @@ export interface ImagesListRequest {
 }
 
 export interface ImagesResponseData {
-  count: number;
-  images: Array<ImageData>;
+  count?: number;
+  images?: Array<ImageListData>;
+  status: Status;
 }
 
 const fetchImages = async (
   params: ImagesListRequest
 ): Promise<ImagesResponseData> => {
-  let url = generateUrl(params);
+  let url = generateCollectionUrl(params);
+  let json;
 
-  const response = await fetch(url);
-  const json = await response.json();
+  const status = {
+    successLoaded: false,
+    isLoaded: false
+  };
+
+  try {
+    const response = await fetch(url);
+    json = await response.json();
+  } catch (e) {
+    return { status };
+  }
 
   const { count, artObjects } = json;
 
   const images = artObjects.map((data: ImageResponseData) => {
-    const { id, title, longTitle, headerImage, webImage } = data;
+    const { objectNumber: id, title, longTitle, headerImage, webImage } = data;
     const { url: webImageUrl } = webImage || {};
     const { url: headerImageUrl } = headerImage || {};
 
@@ -51,32 +67,32 @@ const fetchImages = async (
     };
   });
 
-  return { count, images };
+  status.successLoaded = true;
+
+  return { count, images, status };
 };
 
 export function* loadImages(params: ImagesListRequest) {
+  yield put({
+    type: ACTIONS.IMAGES_LOADED,
+    payload: { status: { isLoaded: true, successLoaded: false } }
+  });
+
   const data = yield fetchImages(params);
-  const { images, count } = data;
+  const { images, count, status } = data;
   const { pageLimit } = params;
 
-  yield put({ type: ACTIONS.IMAGES_LOADED, payload: { images } });
+  yield put({
+    type: ACTIONS.IMAGES_LOADED,
+    payload: { images, status }
+  });
   yield put({ type: ACTIONS.GET_NUMBER_PAGES, payload: { count, pageLimit } });
 }
 
 export function* watchForLoadImages() {
-  // let currentPageLimit = 10;
   while (true) {
     const input = yield take(ACTIONS.GET_IMAGES_LIST);
-
     const params = input.payload;
-
-    // console.log(currentPage, currentPageLimit);
-    // if (pageLimit > currentPageLimit) {
-    //   currentPage = 1;
-    //   currentPageLimit = pageLimit;
-    // }
-    //
-    // console.log(currentPage, currentPageLimit);
 
     yield fork(loadImages, params);
   }

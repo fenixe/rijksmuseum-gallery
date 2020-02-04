@@ -1,5 +1,10 @@
 import styled, { css } from "styled-components";
 
+export const COMMON_ALIGN_SELF_CENTER = css`
+  align-self: center;
+  justify-self: center;
+`;
+
 export const COMMON_TEXT_STYLES = css`
   font-size: 16px;
   font-family: "Lobster", cursive;

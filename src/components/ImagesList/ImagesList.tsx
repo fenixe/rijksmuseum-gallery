@@ -6,22 +6,28 @@ import {
   getCountResult,
   getCurrentPage,
   getImagesList,
+  getImagesListStatus,
   getPageLimit,
   getQuery,
   getSortOrder
 } from "../../selectors";
 import Image from "./Image";
 import { ImagesListContainer, Notification } from "./ImagesList.styles";
+import Spinner from "../LoadingSpinner/Spinner";
 
 const ImagesList: React.FC = (): React.ReactElement => {
+  const dispatch: Dispatch = useDispatch();
+
   const imagesList = useSelector(getImagesList);
   const currentPage = useSelector(getCurrentPage);
   const countResult = useSelector(getCountResult);
   const pageLimit = useSelector(getPageLimit);
   const sort = useSelector(getSortOrder);
+  const status = useSelector(getImagesListStatus);
+
   const query = useSelector(getQuery);
 
-  const dispatch: Dispatch = useDispatch();
+  const { isLoaded, successLoaded } = status;
 
   useEffect(() => {
     dispatch(getImagesListAction({ pageLimit, currentPage, sort, query }));
@@ -30,13 +36,19 @@ const ImagesList: React.FC = (): React.ReactElement => {
   const noDataNotification = "No art object could be found by your query";
 
   return (
-    <ImagesListContainer>
-      {countResult === 0 ? (
-        <Notification>{noDataNotification}</Notification>
+    <>
+      {isLoaded ? (
+        <Spinner />
       ) : (
-        imagesList.map(data => <Image key={data.id} {...data} />)
+        <ImagesListContainer>
+          {countResult === 0 || !successLoaded ? (
+            <Notification>{noDataNotification}</Notification>
+          ) : (
+            imagesList.map(data => <Image key={data.id} {...data} />)
+          )}
+        </ImagesListContainer>
       )}
-    </ImagesListContainer>
+    </>
   );
 };
 

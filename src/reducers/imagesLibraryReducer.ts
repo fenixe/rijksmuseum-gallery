@@ -1,7 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { getImagesListAction, imagesLoadedAction } from "../actions";
+import { Status } from "../sagas";
 
-export interface ImageData {
+export interface ImageListData {
   id: string;
   title: string;
   longTitle: string;
@@ -10,11 +11,16 @@ export interface ImageData {
 }
 
 export interface ImagesListData {
-  images: Array<ImageData>;
+  images: Array<ImageListData>;
+  status: Status;
 }
 
 export const initialState: ImagesListData = {
-  images: []
+  images: [],
+  status: {
+    isLoaded: false,
+    successLoaded: false
+  }
 };
 
 const imagesLibraryReducer = createReducer(initialState, {
@@ -23,12 +29,13 @@ const imagesLibraryReducer = createReducer(initialState, {
     action: ReturnType<typeof imagesLoadedAction>
   ) => {
     const {
-      payload: { images }
+      payload: { images, status }
     } = action;
 
     return {
       ...state,
-      images
+      images,
+      status
     };
   },
   [getImagesListAction.type]: (

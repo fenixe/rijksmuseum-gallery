@@ -1,10 +1,5 @@
-import styled, { css } from "styled-components";
-import { BUTTON_STYLE } from "../../constants";
-
-export const situateInCenter = css`
-  align-self: center;
-  justify-self: center;
-`;
+import styled from "styled-components";
+import { BUTTON_STYLE, COMMON_ALIGN_SELF_CENTER } from "../../constants";
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -42,7 +37,7 @@ export const InfoGridContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  ${situateInCenter};
+  ${COMMON_ALIGN_SELF_CENTER};
   grid-area: 1 / 1 / 2 / 2;
 `;
 
@@ -51,14 +46,14 @@ export const Image = styled.img`
 `;
 
 export const DescriptionContainer = styled.div`
-  ${situateInCenter};
+  ${COMMON_ALIGN_SELF_CENTER};
   grid-area: 1 / 2 / 2 / 3;
   padding: 0 20px;
   overflow: auto;
 `;
 
 export const DetailsButtonContainer = styled.div`
-  ${situateInCenter};
+  ${COMMON_ALIGN_SELF_CENTER};
   grid-area: 2 / 1 / 3 / 2;
 `;
 

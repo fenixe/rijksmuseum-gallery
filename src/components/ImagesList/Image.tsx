@@ -1,9 +1,9 @@
 import React from "react";
 import { StyledImage, StyledLink, Title } from "./ImagesList.styles";
 import { ROUTES } from "../../constants";
-import { ImageData } from "../../reducers";
+import { ImageListData } from "../../reducers";
 
-const Image: React.FC<ImageData> = ({
+const Image: React.FC<ImageListData> = ({
   id,
   title,
   headerImageUrl
