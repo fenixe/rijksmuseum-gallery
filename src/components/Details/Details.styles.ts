@@ -40,7 +40,6 @@ export const Description = styled.div`
 
 export const CloseButton = styled(BUTTON_STYLE)`
   ${COMMON_ALIGN_SELF_CENTER};
-  color: darkgray;
   grid-area: 3 / 2 / 4 / 4;
   justify-self: end;
   height: 40px;
