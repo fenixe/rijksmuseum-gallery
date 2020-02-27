@@ -4,7 +4,7 @@ export const Icon = styled.span<{ isOpen: boolean }>`
   position: absolute;
   top: 10px;
   right: 5%;
-  font-size: 20px;
+  font-size: 1.3rem;
   transition: all 275ms;
   transform: rotate(${({ isOpen }) => (isOpen ? "180" : "0")}deg);
 `;
@@ -21,7 +21,7 @@ export const SelectOrderContainer = styled.div`
   position: relative;
   float: left;
   min-width: 300px;
-  font-size: 16px;
+  font-size: 1rem;
   width: 300px;
   max-height: 40px;
   color: #777;

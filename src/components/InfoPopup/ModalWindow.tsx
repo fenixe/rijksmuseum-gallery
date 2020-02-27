@@ -23,14 +23,14 @@ interface ModalWindowProps {
 
 const ModalWindow: React.FC<ModalWindowProps> = ({
   closePopup
-}): React.ReactElement => {
+}): React.ReactElement | null => {
   const history = useHistory();
   const { id } = useParams();
   const selectImage = useSelector(selectImageById(id));
 
   if (!selectImage) {
     history.push(ROUTES.GALLERY_URL);
-    return <></>;
+    return null;
   }
 
   const { title, longTitle, webImageUrl } = selectImage || {};

@@ -1,23 +1,24 @@
 import { RootState, ImageListData, ImageData } from "../reducers";
 import { Status } from "../sagas";
 
-export const getPageLimit = (state: RootState): number =>
+export const selectPageLimit = (state: RootState): number =>
   state.itemsPerPage.pageLimit;
-export const getTotalShowPages = (state: RootState): number =>
+export const selectTotalShowPages = (state: RootState): number =>
   state.pagination.totalShowPages;
-export const getImagesList = (state: RootState): Array<ImageListData> =>
+export const selectImagesList = (state: RootState): Array<ImageListData> =>
   state.imagesLibrary.images;
-export const getCurrentPage = (state: RootState): number =>
+export const selectCurrentPage = (state: RootState): number =>
   state.pagination.currentPage;
-export const getCountResult = (state: RootState): number =>
+export const selectCountResult = (state: RootState): number =>
   state.pagination.count;
-export const getSortOrder = (state: RootState): string => state.sortOrder.sort;
-export const getQuery = (state: RootState): string => state.search.query;
-export const getImageData = (state: RootState): ImageData =>
+export const selectSortOrder = (state: RootState): string =>
+  state.sortOrder.sort;
+export const selectQuery = (state: RootState): string => state.search.query;
+export const selectImageData = (state: RootState): ImageData =>
   (state.imageDetails.imageData as ImageData) || {};
-export const getImageDataStatus = (state: RootState): Status =>
+export const selectImageDataStatus = (state: RootState): Status =>
   state.imageDetails.status;
-export const getImagesListStatus = (state: RootState): Status =>
+export const selectImagesListStatus = (state: RootState): Status =>
   state.imagesLibrary.status;
 
 export const selectImageById = (id: string | undefined) => (

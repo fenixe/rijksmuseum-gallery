@@ -6,7 +6,7 @@ export const COMMON_ALIGN_SELF_CENTER = css`
 `;
 
 export const COMMON_TEXT_STYLES = css`
-  font-size: 16px;
+  font-size: 1rem;
   font-family: "Lobster", cursive;
   font-weight: 300;
 `;

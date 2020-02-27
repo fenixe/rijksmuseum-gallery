@@ -1,3 +1,1 @@
-import InfoPopup from "./InfoPopup";
-
-export default InfoPopup;
+export { InfoPopup as default } from "./InfoPopup";

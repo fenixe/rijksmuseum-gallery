@@ -42,13 +42,13 @@ const imagesLibraryReducer = createReducer(initialState, {
     state: ImagesListData,
     action: ReturnType<typeof getImagesListAction>
   ) => {
-    const {
-      payload: { pageLimit, currentPage, sort, query }
+    let {
+      payload: { itemsPerPage, currentPage, sort, query }
     } = action;
 
     return {
       ...state,
-      pageLimit,
+      itemsPerPage,
       currentPage,
       sort,
       query

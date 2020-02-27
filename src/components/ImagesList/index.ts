@@ -1,3 +1,1 @@
-import ImagesList from "./ImagesList";
-
-export default ImagesList;
+export { ImagesList as default } from "./ImagesList";

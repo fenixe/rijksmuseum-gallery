@@ -1,3 +1,1 @@
-import SortField from "./SortField";
-
-export default SortField;
+export { SortField as default } from "./SortField";

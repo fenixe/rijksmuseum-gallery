@@ -2,12 +2,12 @@ import { API_KEY, API_URL, PAGE_NEIGHBOURS } from "../constants";
 import { ImagesListRequest } from "../sagas";
 
 export const generateCollectionUrl = ({
-  pageLimit,
+  itemsPerPage,
   currentPage,
   sort,
   query
 }: ImagesListRequest): string => {
-  let url = `${API_URL}?key=${API_KEY}&ps=${pageLimit}&p=${currentPage}`;
+  let url = `${API_URL}?key=${API_KEY}&ps=${itemsPerPage}&p=${currentPage}`;
 
   if (sort) {
     url += `&s=${sort}`;

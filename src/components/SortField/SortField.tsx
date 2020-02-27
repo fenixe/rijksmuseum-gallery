@@ -19,10 +19,10 @@ export interface SortOrderItem {
   title: string;
 }
 
-const SortField: React.FC = (): React.ReactElement => {
+export const SortField: React.FC = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
-  const [selectValue, setSelectValue] = useState();
+  const [selectValue, setSelectValue] = useState<string>();
   const [isListOpen, setIsListOpen] = useState(false);
 
   const selectSortOrder = ({ key, title }: SortOrderItem): void => {
@@ -48,13 +48,14 @@ const SortField: React.FC = (): React.ReactElement => {
       <ContainerSelectList>
         <SelectList isOpen={isListOpen}>
           {SORT_LIST.map((item, index) => {
+            const { title } = item;
             return (
               <SelectListItem
-                isActive={selectValue === index}
+                isActive={selectValue === title}
                 onClick={() => selectSortOrder(item)}
                 key={index}
               >
-                {item.title}
+                {title}
               </SelectListItem>
             );
           })}
@@ -63,5 +64,3 @@ const SortField: React.FC = (): React.ReactElement => {
     </SelectOrderContainer>
   );
 };
-
-export default SortField;

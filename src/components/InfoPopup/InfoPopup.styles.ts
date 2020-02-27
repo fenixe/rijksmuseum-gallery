@@ -25,7 +25,7 @@ export const Window = styled.div`
 `;
 
 export const Title = styled.p`
-  font-size: 22px;
+  font-size: 1.6rem;
   margin-top: 0;
   text-align: center;
 `;
@@ -64,7 +64,7 @@ export const CloseButtonContainer = styled.div`
 `;
 
 export const Description = styled.div`
-  font-size: 18px;
+  font-size: 1.4rem;
 `;
 
 export const CloseButton = styled(BUTTON_STYLE)`

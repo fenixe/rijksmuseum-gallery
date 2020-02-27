@@ -5,7 +5,7 @@ import SearchButton from "./SearchButton";
 import { SearchContainer, Input } from "./SearchBox.styles";
 import { setSearchAction } from "../../actions";
 
-const SearchBox: React.FC = (): React.ReactElement => {
+export const SearchBox: React.FC = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
   const [query, setQuery] = useState("");
@@ -30,5 +30,3 @@ const SearchBox: React.FC = (): React.ReactElement => {
     </SearchContainer>
   );
 };
-
-export default SearchBox;

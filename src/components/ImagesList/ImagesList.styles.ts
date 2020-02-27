@@ -34,7 +34,7 @@ export const Title = styled.span`
   ${CommonStyles};
   color: black;
   z-index: 1;
-  font-size: 18px;
+  font-size: 1.4rem;
   line-height: 1.4;
   column-width: 100vw;
   box-sizing: border-box;

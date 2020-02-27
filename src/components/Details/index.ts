@@ -1,3 +1,1 @@
-import Details from "./Details";
-
-export default Details;
+export { Details as default } from "./Details";

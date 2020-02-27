@@ -3,19 +3,19 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { ROUTES } from "../../constants";
-import { getImageData, getImageDataStatus } from "../../selectors";
+import { selectImageData, selectImageDataStatus } from "../../selectors";
 import { getImageDetailsAction } from "../../actions";
 import DetailsBody from "./DetailsBody";
 import Spinner from "../Spinner";
 import { DetailsContainer } from "./Details.styles";
 
-const Details: React.FC = (): React.ReactElement => {
+export const Details: React.FC = (): React.ReactElement => {
   const history = useHistory();
   const dispatch: Dispatch = useDispatch();
   const { id = "" } = useParams();
 
-  const imageData = useSelector(getImageData);
-  const status = useSelector(getImageDataStatus);
+  const imageData = useSelector(selectImageData);
+  const status = useSelector(selectImageDataStatus);
 
   const { isLoaded, successLoaded } = status;
 
@@ -47,5 +47,3 @@ const Details: React.FC = (): React.ReactElement => {
     </>
   );
 };
-
-export default Details;

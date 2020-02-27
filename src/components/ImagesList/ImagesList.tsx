@@ -3,35 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { getImagesListAction } from "../../actions";
 import {
-  getCountResult,
-  getCurrentPage,
-  getImagesList,
-  getImagesListStatus,
-  getPageLimit,
-  getQuery,
-  getSortOrder
+  selectCountResult,
+  selectCurrentPage,
+  selectImagesList,
+  selectImagesListStatus,
+  selectPageLimit,
+  selectQuery,
+  selectSortOrder
 } from "../../selectors";
 import Image from "./Image";
 import { ImagesListContainer, Notification } from "./ImagesList.styles";
 import Spinner from "../Spinner";
 
-const ImagesList: React.FC = (): React.ReactElement => {
+export const ImagesList: React.FC = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
-  const imagesList = useSelector(getImagesList);
-  const currentPage = useSelector(getCurrentPage);
-  const countResult = useSelector(getCountResult);
-  const pageLimit = useSelector(getPageLimit);
-  const sort = useSelector(getSortOrder);
-  const status = useSelector(getImagesListStatus);
+  const imagesList = useSelector(selectImagesList);
+  const currentPage = useSelector(selectCurrentPage);
+  const countResult = useSelector(selectCountResult);
+  const itemsPerPage = useSelector(selectPageLimit);
+  const sort = useSelector(selectSortOrder);
+  const status = useSelector(selectImagesListStatus);
 
-  const query = useSelector(getQuery);
+  const query = useSelector(selectQuery);
 
   const { isLoaded, successLoaded } = status;
 
   useEffect(() => {
-    dispatch(getImagesListAction({ pageLimit, currentPage, sort, query }));
-  }, [dispatch, pageLimit, currentPage, sort, query]);
+    dispatch(getImagesListAction({ itemsPerPage, currentPage, sort, query }));
+  }, [dispatch, itemsPerPage, currentPage, sort, query]);
 
   const noDataNotification = "No art object could be found by your query";
 
@@ -51,5 +51,3 @@ const ImagesList: React.FC = (): React.ReactElement => {
     </>
   );
 };
-
-export default ImagesList;

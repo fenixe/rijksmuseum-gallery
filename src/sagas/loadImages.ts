@@ -21,7 +21,7 @@ export interface ImageResponseData {
 }
 
 export interface ImagesListRequest {
-  pageLimit: number;
+  itemsPerPage: number;
   currentPage: number;
   sort?: string;
   query?: string;
@@ -78,15 +78,15 @@ export function* loadImages(params: ImagesListRequest) {
     payload: { status: { isLoaded: true, successLoaded: false } }
   });
 
-  const data = yield fetchImages(params);
+  const data: ImagesResponseData = yield fetchImages(params);
   const { images, count, status } = data;
-  const { pageLimit } = params;
+  const { itemsPerPage } = params;
 
   yield put({
     type: ACTIONS.IMAGES_LOADED,
     payload: { images, status }
   });
-  yield put({ type: ACTIONS.GET_NUMBER_PAGES, payload: { count, pageLimit } });
+  yield put({ type: ACTIONS.GET_NUMBER_PAGES, payload: { count, itemsPerPage } });
 }
 
 export function* watchForLoadImages() {

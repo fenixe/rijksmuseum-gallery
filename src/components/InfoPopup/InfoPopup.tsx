@@ -4,7 +4,7 @@ import ModalWindow from "./ModalWindow";
 import { useHistory } from "react-router-dom";
 import { ROUTES } from "../../constants";
 
-const InfoPopup: React.FC = (): React.ReactElement => {
+export const InfoPopup: React.FC = (): React.ReactElement => {
   let history = useHistory();
 
   const closePopup = () => {
@@ -18,5 +18,3 @@ const InfoPopup: React.FC = (): React.ReactElement => {
     </>
   );
 };
-
-export default InfoPopup;

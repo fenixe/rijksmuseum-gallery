@@ -57,7 +57,6 @@ export function* loadImageDetails(params: ImageDetailsRequest) {
   });
 
   const data = yield fetchImageDetails(params);
-  console.log(data);
 
   const { imageData, status } = data;
 

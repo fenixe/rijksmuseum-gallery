@@ -9,7 +9,7 @@ import {
   PaginationContainer
 } from "./Gallery.styles";
 
-const Gallery: React.FC = (): React.ReactElement => (
+export const Gallery: React.FC = (): React.ReactElement => (
   <PreviewContainer>
     <SortField />
 
@@ -24,5 +24,3 @@ const Gallery: React.FC = (): React.ReactElement => (
     </PaginationContainer>
   </PreviewContainer>
 );
-
-export default Gallery;

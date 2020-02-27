@@ -6,14 +6,14 @@ export const DetailsContainer = styled.div`
   width: 100%;
   padding-bottom: 10px;
   overflow: scroll;
-  grid-template-rows: minmax(50px, 80px) 1fr 60px;
+  grid-template-rows: minmax(70px, 80px) 1fr 60px;
   grid-template-columns: 1fr 0.5fr;
 `;
 
 export const Title = styled.h2`
   ${COMMON_ALIGN_SELF_CENTER};
   grid-area: 1 / 1 / 2 / 4;
-  font-size: 1em;
+  font-size: 1.8rem;
   color: white;
   margin: 0;
 `;
@@ -35,7 +35,7 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const Description = styled.div`
-  font-size: 18px;
+  font-size: 1.4rem;
 `;
 
 export const CloseButton = styled(BUTTON_STYLE)`

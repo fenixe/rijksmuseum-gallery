@@ -4,7 +4,7 @@ import { MAX_RESULT_ITEMS } from "../constants";
 
 export interface TotalPagesData {
   count: number;
-  pageLimit: number;
+  itemsPerPage: number;
 }
 
 export interface CurrentPage {
@@ -29,11 +29,11 @@ const paginationReducer = createReducer(initialState, {
     action: ReturnType<typeof getTotalPagesAction>
   ) => {
     const {
-      payload: { count, pageLimit }
+      payload: { count, itemsPerPage }
     } = action;
 
-    let totalShowPages = Math.ceil(count / pageLimit);
-    totalShowPages = Math.min(totalShowPages, MAX_RESULT_ITEMS / pageLimit);
+    let totalShowPages = Math.ceil(count / itemsPerPage);
+    totalShowPages = Math.min(totalShowPages, MAX_RESULT_ITEMS / itemsPerPage);
 
     return {
       ...state,
